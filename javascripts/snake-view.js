@@ -4,23 +4,23 @@ export default class View{
 
   constructor(){
     this.board = new Board();
-    document.addEventListener("keypress", this.handleKeyEvent)
+    document.addEventListener("keypress", this.handleKeyEvent.bind(this))
     this.gamePlaying = window.setInterval(this.step.bind(this), 500);
   }
 
   handleKeyEvent(event){
     let pressedLetter = event.keyCode;
     switch(pressedLetter){
-      case(87):
+      case(119):
         this.board.snake.turn("N");
         return;
-      case(65):
+      case(97):
         this.board.snake.turn("W");
         return;
-      case(83):
+      case(115):
         this.board.snake.turn("S");
         return;
-      case(68):
+      case(100):
         this.board.snake.turn("E");
         return;
       default:
@@ -32,7 +32,7 @@ export default class View{
     if(this.board.snake.move() === true){
       window.clearInterval(this.gamePlaying);
       alert("You lost!");
-    } else {      
+    } else {
       this.board.render();
     }
   }
